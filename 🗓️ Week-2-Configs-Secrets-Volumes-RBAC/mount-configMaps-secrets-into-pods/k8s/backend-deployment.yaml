@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: item-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: item-backend
+  template:
+    metadata:
+      labels:
+        app: item-backend
+    spec:
+      containers:
+      - name: item-backend
+        image: your-dockerhub-username/item-backend:latest
+        ports:
+        - containerPort: 3001
+        envFrom:
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: app-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: item-backend-service
+spec:
+  selector:
+    app: item-backend
+  ports:
+  - port: 3001
+    targetPort: 3001
+  type: ClusterIP

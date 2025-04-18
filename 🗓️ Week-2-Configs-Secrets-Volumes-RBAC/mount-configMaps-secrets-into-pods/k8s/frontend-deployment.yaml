@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: item-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: item-frontend
+  template:
+    metadata:
+      labels:
+        app: item-frontend
+    spec:
+      containers:
+      - name: item-frontend
+        image: meghnadsaha422/item-frontend:latest
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: app-secrets̉̉
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: item-frontend-service
+spec:
+  selector:
+    app: item-frontend
+  ports:
+  - port: 3000
+    targetPort: 3000
+  type: NodePort
