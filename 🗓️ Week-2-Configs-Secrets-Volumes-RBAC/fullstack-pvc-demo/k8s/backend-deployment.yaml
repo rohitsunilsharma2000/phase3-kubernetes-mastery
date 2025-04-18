@@ -1,0 +1,27 @@
+# // k8s/backend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: meghnadsaha422/backend:latest
+        ports:
+        - containerPort: 3001
+        volumeMounts:
+        - name: backend-logs
+          mountPath: /usr/src/app/logs
+      volumes:
+      - name: backend-logs
+        persistentVolumeClaim:
+          claimName: backend-pvc

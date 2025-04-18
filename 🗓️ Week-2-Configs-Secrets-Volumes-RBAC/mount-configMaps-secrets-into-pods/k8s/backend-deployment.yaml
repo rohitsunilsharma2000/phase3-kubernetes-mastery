@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: item-backend
-        image: your-dockerhub-username/item-backend:latest
+        image: meghnadsaha422name/item-backend:latest
         ports:
         - containerPort: 3001
         envFrom:
