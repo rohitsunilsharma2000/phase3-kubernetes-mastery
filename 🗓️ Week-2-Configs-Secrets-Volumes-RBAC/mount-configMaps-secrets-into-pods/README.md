@@ -88,3 +88,34 @@ kubectl apply -f frontend-deployment.yaml
 
 ---
 
+
+---
+
+## 🧼 Clean-Up Commands
+
+### 1. **Delete All Kubernetes Resources**
+```bash
+kubectl delete -f k8s/frontend-service.yaml
+kubectl delete -f k8s/frontend-deployment.yaml
+kubectl delete -f k8s/pvc-frontend.yaml
+
+kubectl delete -f k8s/backend-service.yaml
+kubectl delete -f k8s/backend-deployment.yaml
+kubectl delete -f k8s/pvc-backend.yaml
+```
+
+### 2. **Delete All PVCs and Volumes (if lingering)**
+```bash
+kubectl delete pvc backend-pvc
+kubectl delete pvc frontend-pvc
+```
+
+### 3. **Delete Docker Images Locally (optional)**
+```bash
+docker rmi meghnadsaha422/backend:latest
+
+docker rmi meghnadsaha422/frontend:latest
+```
+
+---
+
