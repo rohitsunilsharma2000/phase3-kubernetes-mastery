@@ -1,0 +1,6 @@
+replicaCount: 2
+
+service:
+  type: NodePort
+  ports:
+    http: 8080
